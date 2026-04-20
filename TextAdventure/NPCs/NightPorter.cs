@@ -1,4 +1,6 @@
-namespace TextAdventure
+using TextAdventure.Rooms;
+
+namespace TextAdventure.NPCs
 {
     // Nachtportier: schaltet das Licht ein wenn man mit ihm spricht
     public class NightPorter : NPC

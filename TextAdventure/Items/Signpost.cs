@@ -1,4 +1,6 @@
-namespace TextAdventure
+using TextAdventure.Rooms;
+
+namespace TextAdventure.Items
 {
     // Wegweiser: zeigt an wohin eine Richtung fuehrt
     public class Signpost : Item

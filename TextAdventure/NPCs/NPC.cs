@@ -1,4 +1,6 @@
-namespace TextAdventure
+using TextAdventure.Interfaces;
+
+namespace TextAdventure.NPCs
 {
     // Abstrakte Basisklasse fuer alle Nicht-Spieler-Charaktere
     public abstract class NPC : ITalkable

@@ -1,4 +1,6 @@
-namespace TextAdventure
+using TextAdventure.Rooms;
+
+namespace TextAdventure.Items
 {
     // Generisches Item mit konfigurierbarer Use-Ausgabe
     public class GenericItem : Item

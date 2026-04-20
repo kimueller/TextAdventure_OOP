@@ -1,4 +1,6 @@
-namespace TextAdventure
+using TextAdventure.Rooms;
+
+namespace TextAdventure.Items
 {
     // Generisches Container-Item (z.B. Schrank): enthaelt weitere Items, die angezeigt werden
     public class ContainerItem : Item

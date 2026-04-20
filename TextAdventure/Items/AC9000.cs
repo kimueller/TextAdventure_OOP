@@ -1,4 +1,7 @@
-namespace TextAdventure
+using TextAdventure.Interfaces;
+using TextAdventure.Rooms;
+
+namespace TextAdventure.Items
 {
     // Der allmächtige Compiler AC 9000 – Ziel des Spiels
     // Kann benutzt und gesprochen werden (ITalkable)

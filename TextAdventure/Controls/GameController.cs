@@ -1,7 +1,11 @@
 using System;
 using System.Collections.Generic;
+using TextAdventure.Interfaces;
+using TextAdventure.Items;
+using TextAdventure.NPCs;
+using TextAdventure.Rooms;
 
-namespace TextAdventure
+namespace TextAdventure.Controls
 {
     // Loesung: GameController steuert den Spielablauf und parst Benutzereingaben
     // Konsoleausgaben sind auf Program.cs und GameController beschraenkt

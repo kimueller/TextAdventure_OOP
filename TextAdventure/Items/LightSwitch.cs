@@ -1,4 +1,7 @@
-namespace TextAdventure
+using TextAdventure.NPCs;
+using TextAdventure.Rooms;
+
+namespace TextAdventure.Items
 {
     // Lichtschalter: schaltet das Licht im aktuellen Raum ein oder aus
     public class LightSwitch : Item

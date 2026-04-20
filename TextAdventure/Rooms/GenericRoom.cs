@@ -1,4 +1,4 @@
-namespace TextAdventure
+namespace TextAdventure.Rooms
 {
     // Generischer Raum ohne spezielles Verhalten
     public class GenericRoom : Room

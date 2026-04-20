@@ -1,4 +1,4 @@
-namespace TextAdventure
+namespace TextAdventure.NPCs
 {
     // Generischer NPC mit konfigurierbaren Antworten
     public class GenericNPC : NPC

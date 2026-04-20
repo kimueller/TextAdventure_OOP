@@ -1,4 +1,6 @@
 using System;
+using TextAdventure.Controls;
+using TextAdventure.Rooms;
 
 namespace TextAdventure
 {

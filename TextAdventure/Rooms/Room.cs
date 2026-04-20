@@ -1,6 +1,8 @@
 using System.Collections.Generic;
+using TextAdventure.Items;
+using TextAdventure.NPCs;
 
-namespace TextAdventure
+namespace TextAdventure.Rooms
 {
     // Abstrakte Basisklasse fuer alle Raeume
     // Raeume haben bis zu 4 Nachbarraeume (Himmelsrichtungen), Items und NPCs

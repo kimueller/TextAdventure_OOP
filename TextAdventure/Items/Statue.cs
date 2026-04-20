@@ -1,6 +1,7 @@
 using System.Collections.Generic;
+using TextAdventure.Rooms;
 
-namespace TextAdventure
+namespace TextAdventure.Items
 {
     // Statue von Tim Gates: schaltet alle Raeume der Map ein wenn benutzt
     public class Statue : Item

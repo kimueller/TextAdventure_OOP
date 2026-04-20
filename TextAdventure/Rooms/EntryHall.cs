@@ -1,4 +1,4 @@
-namespace TextAdventure
+namespace TextAdventure.Rooms
 {
     // Eingangshalle: Startpunkt, dunkel, Nachtportier wartet hier
     public class EntryHall : Room

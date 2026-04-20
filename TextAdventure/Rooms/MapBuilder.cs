@@ -1,7 +1,9 @@
 using System;
 using System.Collections.Generic;
+using TextAdventure.Items;
+using TextAdventure.NPCs;
 
-namespace TextAdventure
+namespace TextAdventure.Rooms
 {
     // Baut die Spielwelt auf und gibt Startraum + alle Raeume zurueck
     // Loesung: AC9000 wird in einem zufaelligen Raum (ausser Eingangshalle) platziert
@@ -10,36 +12,36 @@ namespace TextAdventure
         public static (Room startRoom, List<Room> allRooms) Build()
         {
             // --- Raeume erstellen ---
-            EntryHall    entryHall    = new EntryHall();
-            Room staircase     = new GenericRoom("Stiegenhaus");
-            Room hallway1      = new GenericRoom("Kellergang I");
-            Room hallway2      = new GenericRoom("Kellergang II");
-            Room broom         = new GenericRoom("Besenkammer");
-            Room oldServer     = new GenericRoom("Alter Serverraum");
+            EntryHall entryHall = new EntryHall();
+            Room staircase = new GenericRoom("Stiegenhaus");
+            Room hallway1 = new GenericRoom("Kellergang I");
+            Room hallway2 = new GenericRoom("Kellergang II");
+            Room broom = new GenericRoom("Besenkammer");
+            Room oldServer = new GenericRoom("Alter Serverraum");
             Room abandonedOffice = new GenericRoom("Verlassenes Büro");
-            Room coldRoom      = new GenericRoom("Kühlraum", isLit: false);
-            Room warehouse     = new GenericRoom("Lagerhalle");
+            Room coldRoom = new GenericRoom("Kühlraum", isLit: false);
+            Room warehouse = new GenericRoom("Lagerhalle");
 
             // --- Verbindungen gemaess Beispielmap ---
             // Eingangshalle <-> Stiegenhaus (Osten)
-            entryHall.East  = staircase;
-            staircase.West  = entryHall;
+            entryHall.East = staircase;
+            staircase.West = entryHall;
 
             // Stiegenhaus <-> Kellergang I (Sueden)
             staircase.South = hallway1;
-            hallway1.North  = staircase;
+            hallway1.North = staircase;
 
             // Kellergang I <-> Kellergang II (Sueden)
-            hallway1.South  = hallway2;
-            hallway2.North  = hallway1;
+            hallway1.South = hallway2;
+            hallway2.North = hallway1;
 
             // Kellergang II <-> Besenkammer (Osten)
-            hallway2.East   = broom;
-            broom.West      = hallway2;
+            hallway2.East = broom;
+            broom.West = hallway2;
 
             // Besenkammer <-> Alter Serverraum (Osten)
-            broom.East      = oldServer;
-            oldServer.West  = broom;
+            broom.East = oldServer;
+            oldServer.West = broom;
 
             // Alter Serverraum <-> Verlassenes Büro (Norden)
             oldServer.North = abandonedOffice;
@@ -47,11 +49,11 @@ namespace TextAdventure
 
             // Alter Serverraum <-> Kühlraum (Sueden)
             oldServer.South = coldRoom;
-            coldRoom.North  = oldServer;
+            coldRoom.North = oldServer;
 
             // Alter Serverraum <-> Lagerhalle (Osten)
-            oldServer.East  = warehouse;
-            warehouse.West  = oldServer;
+            oldServer.East = warehouse;
+            warehouse.West = oldServer;
 
             // --- Alle Raeume fuer Statue und AC9000-Platzierung ---
             List<Room> allRooms = new List<Room>

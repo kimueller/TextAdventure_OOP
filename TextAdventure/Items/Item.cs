@@ -1,6 +1,7 @@
 using System.Collections.Generic;
+using TextAdventure.Rooms;
 
-namespace TextAdventure
+namespace TextAdventure.Items
 {
     // Abstrakte Basisklasse fuer alle Gegenstaende im Spiel
     // Items koennen benutzt werden und ggf. weitere Items enthalten
