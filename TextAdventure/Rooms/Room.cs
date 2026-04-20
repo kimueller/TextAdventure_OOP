@@ -21,12 +21,13 @@ namespace TextAdventure.Rooms
         public List<Item> Items { get; protected set; }
         public List<NPC>  NPCs  { get; protected set; }
 
-        protected Room(string name, bool isLightOn = true)
+        protected Room(string name, string directions, bool isLightOn = true)
         {
             Name  = name;
             IsLightOn = isLightOn;
             Items = new List<Item>();
             NPCs  = new List<NPC>();
+            Items.Add(new Signpost(directions));
         }
 
         // Wird aufgerufen wenn Spieler den Raum betritt

@@ -27,7 +27,7 @@ namespace TextAdventure.Controls
         // Gibt die Eingabeaufforderung fuer den aktuellen Raum aus
         public void PrintPrompt()
         {
-            Console.Write($"\nRaum {_player.CurrentRoom.Name}: ");
+            Console.Write($"\n{_player.CurrentRoom.Name}: ");
             HelperFunctions.WriteColour("[U]mschauen ", ConsoleColor.Cyan);
             HelperFunctions.WriteColour("[S]prich ", ConsoleColor.Yellow);
             HelperFunctions.WriteColour("[G]ehe ", ConsoleColor.Green);
@@ -41,7 +41,7 @@ namespace TextAdventure.Controls
         {
             if (string.IsNullOrWhiteSpace(input)) return;
 
-            string[] parts = input.Trim().Split(new char[]{' '}, StringSplitOptions.RemoveEmptyEntries);
+            string[] parts = input.Trim().Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
             string cmd = parts[0].ToUpper();
 
             if (cmd == "U" || cmd == "UMSCHAUEN")
@@ -67,7 +67,28 @@ namespace TextAdventure.Controls
             {
                 HelperFunctions.WriteLineColour("Unbekannter Befehl. Verfügbare Befehle: [U]mschauen [S]prich [G]ehe [N]utze", ConsoleColor.DarkGray);
             }
+
         }
+
+        public void CheckRecursiveQuizAnswer(RecursionRoom recursionRoom)
+        {
+            while (!recursionRoom.Solved)
+            {
+                Console.Write("Deine Antwort: ");
+                string input = Console.ReadLine() ?? string.Empty;
+
+                if (recursionRoom.ReactToAnswer(input))
+                {
+                    HelperFunctions.WriteLineColour("Richtig! Du hast das Rätsel gelöst.", ConsoleColor.Green);
+                }
+                else
+                {
+                    HelperFunctions.WriteLineColour("Falsch. Versuche es erneut.", ConsoleColor.Red);
+                }
+            }
+        }
+
+
 
         // --- Aktionen ---
 
@@ -131,6 +152,10 @@ namespace TextAdventure.Controls
                 if (HelperFunctions.MatchesTarget(npc.Name, target))
                 {
                     HelperFunctions.PrintLines(npc.Talk(), ConsoleColor.Yellow);
+                    if (_player.CurrentRoom is RecursionRoom recursionRoom && npc is LordRecursivus)
+                    {
+                        CheckRecursiveQuizAnswer(recursionRoom);
+                    }
                     return;
                 }
             }
@@ -144,7 +169,7 @@ namespace TextAdventure.Controls
             for (int i = 0; i < r.Items.Count; i++)
             {
                 bool matchIndex = target == (i + 1).ToString();
-                bool matchName  = HelperFunctions.MatchesTarget(r.Items[i].Name, target);
+                bool matchName = HelperFunctions.MatchesTarget(r.Items[i].Name, target);
                 if (matchIndex || matchName)
                 {
                     if (r.Items[i] is ITalkable talkable)
@@ -159,7 +184,7 @@ namespace TextAdventure.Controls
                             if (line != "GAME_WIN")
                                 HelperFunctions.WriteLineColour(line, ConsoleColor.Cyan);
 
-                        if (win) _gameRunning= HelperFunctions.StopGame();
+                        if (win) _gameRunning = HelperFunctions.StopGame();
                         return;
                     }
                     else
@@ -181,13 +206,21 @@ namespace TextAdventure.Controls
 
             switch (direction)
             {
-                case "N": case "NORDEN": case "NORD":
+                case "N":
+                case "NORDEN":
+                case "NORD":
                     next = r.North; dirName = "Norden"; break;
-                case "S": case "SUEDEN": case "SÜDEN":
+                case "S":
+                case "SUEDEN":
+                case "SÜDEN":
                     next = r.South; dirName = "Süden"; break;
-                case "W": case "WESTEN": case "WEST":
+                case "W":
+                case "WESTEN":
+                case "WEST":
                     next = r.West; dirName = "Westen"; break;
-                case "O": case "OSTEN": case "OST":
+                case "O":
+                case "OSTEN":
+                case "OST":
                     next = r.East; dirName = "Osten"; break;
                 default:
                     HelperFunctions.WriteLineColour("Unbekannte Richtung. Benutze N, S, W oder O.", ConsoleColor.DarkGray);

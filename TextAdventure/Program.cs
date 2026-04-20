@@ -9,22 +9,34 @@ namespace TextAdventure
     {
         static void Main(string[] args)
         {
-            // Intro-Text
             HelperFunctions.WriteLineColour(
-                "In einem Universum aus Daten und Algorithmen schlummert eine uralte Macht: der\n" +
-                "allmächtige Compiler 'AC 9000'. Legenden erzählen von seinem unendlichen Wissen\n" +
-                "und seiner Fähigkeit, jeden Code manipulieren zu können, jeden Datentyp casten\n" +
-                "zu können und jede Schleife mit nur einem Durchlauf zu bewältigen. Einige\n" +
-                "behaupten sogar, dass der Compiler die Gedanken des:der Programmier:in lesen\n" +
-                "kann....\n\n" +
-                "Du, Dave - ein:e mutige:r Programmier:in - begibst Dich auf die Suche nach\n" +
-                "diesem sagenumwobenen Compiler. Angetrieben von Neugier und Abenteuerlust\n" +
-                "machst Du Dich in die Hauptzentrale des Software-Megakonzerns MicroApple auf,\n" +
-                "wo laut Gerüchten der Compiler in dessen Untiefen versteckt sein soll....",
+                "In einem Universum aus Daten und Algorithmen schlummert eine uralte Macht:\n" +
+                "der allmächtige Compiler 'AC 9000'. Legenden berichten von seinem\n" +
+                "unendlichen Wissen und seiner Fähigkeit, jeden Code zu manipulieren,\n" +
+                "jeden Datentyp zu casten und jede noch so komplexe Schleife in nur\n" +
+                "einem einzigen Durchlauf zu bezwingen.\n\n" +
+
+                "Manche behaupten sogar, der Compiler könne die Gedanken von\n" +
+                "Programmierer:innen lesen – Fehler erkennen, bevor sie überhaupt\n" +
+                "geschrieben wurden.\n\n" +
+
+                "Du, Dave – ein:e mutige:r Programmierer:in – begibst dich auf die Suche\n" +
+                "nach diesem sagenumwobenen Artefakt. Angetrieben von Neugier,\n" +
+                "Ehrgeiz und dem Wunsch, den perfekten Code zu schreiben.\n\n" +
+
+                "Dein Weg führt dich tief hinein in das gefürchtete Bit-Labyrinth –\n" +
+                "ein Ort, an dem sich Logik und Wahnsinn vermischen.\n" +
+                "Hier existieren Räume, die sich selbst neu kompilieren,\n" +
+                "und Kreaturen, die aus purem Code bestehen.\n\n" +
+
+                "Irgendwo in diesen Untiefen wartet der AC 9000.\n" +
+                "Doch nicht jeder, der ihn sucht, kehrt zurück...\n\n" +
+
+                "Initialisierung gestartet...",
                 ConsoleColor.Cyan);
 
             // Map & Player initialisieren
-            var (startRoom, allRooms) = MapBuilder.Build();
+            var startRoom = MapBuilder.Build();
             Player player = new Player("Peter");
             player.CurrentRoom = startRoom;
 
