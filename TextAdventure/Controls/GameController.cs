@@ -1,10 +1,9 @@
 using System;
-using System.Collections.Generic;
 using TextAdventure.Interfaces;
 using TextAdventure.Items;
 using TextAdventure.NPCs;
-using TextAdventure.Rooms;
 using TextAdventure.Players;
+using TextAdventure.Rooms;
 
 
 namespace TextAdventure.Controls
@@ -24,7 +23,10 @@ namespace TextAdventure.Controls
 
         public bool IsRunning => _gameRunning;
 
-        // Gibt die Eingabeaufforderung fuer den aktuellen Raum aus
+        /// <summary>
+        /// Gibt den momentanen Raum und die möglichen Aktionen aus. 
+        /// Wird vor jeder Eingabeaufforderung aufgerufen.
+        /// </summary>
         public void PrintPrompt()
         {
             Console.Write($"\n{_player.CurrentRoom.Name}: ");
@@ -36,7 +38,10 @@ namespace TextAdventure.Controls
             Console.Write("> ");
         }
 
-        // Verarbeitet eine Eingabezeile
+        /// <summary>
+        /// Checkt den input --> wenn er korrekt ist, führe die Aktion aus
+        /// </summary>
+        /// <param name="input">Gewünschte Aktion</param>
         public void HandleInput(string input)
         {
             if (string.IsNullOrWhiteSpace(input)) return;
@@ -70,8 +75,13 @@ namespace TextAdventure.Controls
 
         }
 
+        /// <summary>
+        /// Kontrolliert, ob die Antowrt für das Rekursionsquiz richtig ist
+        /// </summary>
+        /// <param name="recursionRoom">den Recursionsraum für die Properties</param>
         public void CheckRecursiveQuizAnswer(RecursionRoom recursionRoom)
         {
+            // solange das Rätsel noch nicht gelöst ist, fragt er nach der Antwort seines Rätsels
             while (!recursionRoom.Solved)
             {
                 Console.Write("Deine Antwort: ");
@@ -90,8 +100,11 @@ namespace TextAdventure.Controls
 
 
 
-        // --- Aktionen ---
+        // Aktionen
 
+        /// <summary>
+        /// Schaut sich im raum umher und gibt NPCs/Items im raum an, oder wenn das Licht aus ist dass man nichts sieht
+        /// </summary>
         private void LookAround()
         {
             Room r = _player.CurrentRoom;
@@ -109,10 +122,16 @@ namespace TextAdventure.Controls
             // NPCs
             Console.WriteLine("Es sind folgende Personen anwesend:");
             if (r.NPCs.Count == 0)
+            {
                 HelperFunctions.WriteLineColour(" Keine Personen im Raum.", ConsoleColor.DarkGray);
+            }
             else
+            {
                 foreach (NPC npc in r.NPCs)
+                {
                     HelperFunctions.WriteLineColour($" [{npc.Name[0]}] {npc.Name}", ConsoleColor.Yellow);
+                }
+            }
 
             // Items
             Console.WriteLine("Du siehst im Raum:");
@@ -136,6 +155,10 @@ namespace TextAdventure.Controls
                 }
         }
 
+        /// <summary>
+        /// Rede mit einem NPC/Item
+        /// </summary>
+        /// <param name="target">NPC/Items mit dem man reden will</param>
         private void Talk(string target)
         {
             if (string.IsNullOrEmpty(target))
@@ -152,7 +175,7 @@ namespace TextAdventure.Controls
                 if (HelperFunctions.MatchesTarget(npc.Name, target))
                 {
                     HelperFunctions.PrintLines(npc.Talk(), ConsoleColor.Yellow);
-                    if (_player.CurrentRoom is RecursionRoom recursionRoom && npc is LordRecursivus)
+                    if (r is RecursionRoom recursionRoom && npc is LordRecursivus)
                     {
                         CheckRecursiveQuizAnswer(recursionRoom);
                     }
@@ -160,7 +183,6 @@ namespace TextAdventure.Controls
                 }
             }
 
-            // Dann sprechbare Items
             if (!r.IsLightOn)
             {
                 HelperFunctions.WriteLineColour("Es ist zu dunkel um irgendjemanden oder etwas zu sehen.", ConsoleColor.DarkGray);
@@ -198,35 +220,58 @@ namespace TextAdventure.Controls
             HelperFunctions.WriteLineColour($"'{target}' ist hier nicht zu finden.", ConsoleColor.DarkGray);
         }
 
+        /// <summary>
+        /// Gehe in diese Richtung
+        /// </summary>
+        /// <param name="direction">Richtung in der man gehen soll(Himmelsrichtungen)</param>
         private void Go(string direction)
         {
             Room r = _player.CurrentRoom;
+            if (r is RecursionRoom room)
+            {
+                HelperFunctions.WriteLineColour(
+                    $"Du kannst den {r.Name} nicht verlassen!\n" +
+                    $"Lord Recursivus hat dicg in seiner Rekursion gefangen!\n" +
+                    $"Löse sein Rätsel um aus dem Raum zu entkommen! (Rede mit ihm.)",
+                    ConsoleColor.Red);
+
+            }
             Room next = null;
             string dirName = "";
 
+            //switch case für die Bestimmung der Richtung
             switch (direction)
             {
                 case "N":
                 case "NORDEN":
                 case "NORD":
-                    next = r.North; dirName = "Norden"; break;
+                    next = r.North;
+                    dirName = "Norden";
+                    break;
                 case "S":
                 case "SUEDEN":
                 case "SÜDEN":
-                    next = r.South; dirName = "Süden"; break;
+                    next = r.South;
+                    dirName = "Süden";
+                    break;
                 case "W":
                 case "WESTEN":
                 case "WEST":
-                    next = r.West; dirName = "Westen"; break;
+                    next = r.West;
+                    dirName = "Westen";
+                    break;
                 case "O":
                 case "OSTEN":
                 case "OST":
-                    next = r.East; dirName = "Osten"; break;
+                    next = r.East;
+                    dirName = "Osten";
+                    break;
                 default:
                     HelperFunctions.WriteLineColour("Unbekannte Richtung. Benutze N, S, W oder O.", ConsoleColor.DarkGray);
                     return;
             }
 
+            //Wenn in dieser Richtung kein Raum ist, gebe eine Meldung aus
             if (next == null)
             {
                 HelperFunctions.WriteLineColour($"Du versuchst nach {dirName} zu gehen - Du läufst mit voller Wucht gegen eine verschlossene Türe. Autsch!", ConsoleColor.Red);
@@ -240,6 +285,10 @@ namespace TextAdventure.Controls
                 HelperFunctions.WriteLineColour(line, ConsoleColor.DarkGray);
         }
 
+        /// <summary>
+        /// Interagiere mit einem Item
+        /// </summary>
+        /// <param name="target">Item mit dem man interargieren will</param>
         private void Use(string target)
         {
             if (string.IsNullOrEmpty(target))
@@ -252,7 +301,7 @@ namespace TextAdventure.Controls
 
             if (!r.IsLightOn)
             {
-                // Lichtschalter koennen auch im Dunkeln gefunden werden (durch Ertasten)
+                // Lichtschalter koennen auch im Dunkeln gefunden werden (durch Checken mit der Use-Methode)
                 foreach (Item item in r.Items)
                     if (item is LightSwitch)
                     {

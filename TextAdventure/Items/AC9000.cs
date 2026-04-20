@@ -1,22 +1,24 @@
 using System;
-using System.ComponentModel.Design;
 using TextAdventure.Controls;
 using TextAdventure.Interfaces;
 using TextAdventure.Rooms;
 
 namespace TextAdventure.Items
 {
-    // Der allmächtige Compiler AC 9000 – Ziel des Spiels
-    // Kann benutzt und gesprochen werden (ITalkable)
     public class AC9000 : Item, ITalkable
     {
         bool _hasSpoken;
         bool _solved = false;
         public AC9000() : base("Almighty Compiler 9000") { }
 
+        /// <summary>
+        /// Überschriebene Use-Methode für AC9000
+        /// </summary>
+        /// <param name="room">Raum in der der Compiler ist</param>
+        /// <returns>Antworten des Compilers</returns>
         public override string[] Use(Room room)
         {
-            HelperFunctions.WriteLineColour("Mit [c] oder [cancel] kannst du abbrechen, wenn du die Lösung noch nicht weißt!", ConsoleColor.Green); 
+            HelperFunctions.WriteLineColour("Mit [c] oder [cancel] kannst du abbrechen, wenn du die Lösung noch nicht weißt!", ConsoleColor.Green);
             var isCorrect = CheckCompilerCode();
             if (isCorrect)
             {
@@ -36,6 +38,10 @@ namespace TextAdventure.Items
 
         }
 
+        /// <summary>
+        /// Sprich mit dem Compiler, um mehr über ihn zu erfahren oder um das Spiel zu gewinnen, wenn er bereits gebändigt ist
+        /// </summary>
+        /// <returns>Antwort des Compilers</returns>
         public string[] Talk()
         {
             if (_solved)
@@ -44,7 +50,7 @@ namespace TextAdventure.Items
                 {
                     "AC9000: Du hast mich überwältigt!",
                     "AC9000: Ich stehe dir zu Diensten!",
-                    "GAME_WIN" 
+                    "GAME_WIN"
                 };
             }
             if (!_hasSpoken)
@@ -59,10 +65,14 @@ namespace TextAdventure.Items
             }
             return new string[]
             {
-                "AC9000: \"Ich habe dir bereits alles gesagt, was ich weiß. Finde den versteckten Code und gib ihn ein!\""
+                "AC9000: Ich habe dir bereits alles gesagt, was ich weiß. Finde den versteckten Code und gib ihn ein!"
             };
         }
 
+        /// <summary>
+        /// Checkt, ob der code Richtig ist oder nicht
+        /// </summary>
+        /// <returns>Boolen ob es richtig oder falsh ist</returns>
         public bool CheckCompilerCode()
         {
             while (!_solved)

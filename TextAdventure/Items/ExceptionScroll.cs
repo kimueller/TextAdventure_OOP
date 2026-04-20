@@ -15,8 +15,8 @@ namespace TextAdventure.Items
         {
             return new string[]
             {
-                "In der Exception-Schriftrolle kann man gesammelte Fehlermeldungen entnehmen:",
-                "\nNullReferenceException",
+                "In der Exception-Schriftrolle kann man gesammelte Fehlermeldungen entnehmen:\n",
+                "NullReferenceException",
                 "StackOverflowException",
                 "IndexOutOfRangeException",
                 "InvalidOperationException",

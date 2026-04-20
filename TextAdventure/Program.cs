@@ -1,7 +1,7 @@
 using System;
 using TextAdventure.Controls;
-using TextAdventure.Rooms;
 using TextAdventure.Players;
+using TextAdventure.Rooms;
 
 namespace TextAdventure
 {
@@ -9,13 +9,12 @@ namespace TextAdventure
     {
         static void Main(string[] args)
         {
-
-
             // Map & Player initialisieren
             var startRoom = MapBuilder.Build();
             Player player = new Player("Sir Bytus, der III.");
             player.CurrentRoom = startRoom;
 
+            // Text-Intro
             HelperFunctions.WriteLineColour(
                 "In einem Universum aus Daten und Algorithmen schlummert eine uralte Macht:\n" +
                 "der allmächtige Compiler 'AC 9000'. Legenden berichten von seinem\n" +
@@ -42,14 +41,15 @@ namespace TextAdventure
                 "Initialisierung gestartet...",
                 ConsoleColor.Cyan);
 
-            // Dunkel-Intro + NPC-Schrei
+            // Spielbeginn mit Beschreibung des Startzimmers/Geshenisses
             Console.WriteLine($"\nDu stehst in {startRoom.Name}. Es ist stockdunkel. " +
                               "Aus dem Raum heraus hörst Du etwas schreien:");
             HelperFunctions.WriteLineColour("[H]ello Van World: \"Halt, stehen bleiben! Wer ist da?\"",
                 ConsoleColor.Yellow);
 
-            // Spielschleife
+            // Initialisierung des GameControllers 
             GameController controller = new GameController(player);
+            // Hauptschleife für die Eingabe und Verarbeitung von Befehlen
             while (controller.IsRunning)
             {
                 controller.PrintPrompt();

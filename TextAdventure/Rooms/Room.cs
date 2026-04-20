@@ -6,27 +6,24 @@ using TextAdventure.Players;
 
 namespace TextAdventure.Rooms
 {
-    // Abstrakte Basisklasse fuer alle Raeume
-    // Raeume haben bis zu 4 Nachbarraeume (Himmelsrichtungen), Items und NPCs
+    // Abstrakte Basisklasse für alle Raeume
     public abstract class Room
     {
         public string Name { get; protected set; }
         public bool IsLightOn { get; set; }
-
         public Room North { get; set; }
         public Room South { get; set; }
-        public Room West  { get; set; }
-        public Room East  { get; set; }
-
+        public Room West { get; set; }
+        public Room East { get; set; }
         public List<Item> Items { get; protected set; }
-        public List<NPC>  NPCs  { get; protected set; }
+        public List<NPC> NPCs { get; protected set; }
 
         protected Room(string name, string directions, bool isLightOn = true)
         {
-            Name  = name;
+            Name = name;
             IsLightOn = isLightOn;
             Items = new List<Item>();
-            NPCs  = new List<NPC>();
+            NPCs = new List<NPC>();
             Items.Add(new Signpost(directions));
         }
 

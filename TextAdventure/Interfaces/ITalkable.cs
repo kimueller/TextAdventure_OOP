@@ -1,8 +1,11 @@
 namespace TextAdventure.Interfaces
 {
-    // Interface fuer alle Objekte, mit denen der Spieler sprechen kann (NPCs und bestimmte Items)
     public interface ITalkable
     {
+        /// <summary>
+        /// Sprich mit NPC oder Item
+        /// </summary>
+        /// <returns>Antwort des NPCs oder Items</returns>
         string[] Talk();
     }
 }
