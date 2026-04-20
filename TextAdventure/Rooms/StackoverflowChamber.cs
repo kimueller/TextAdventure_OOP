@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using TextAdventure.Items;
 using TextAdventure.NPCs;
+using TextAdventure.Players;
 
 namespace TextAdventure.Rooms
 {
@@ -15,6 +16,14 @@ namespace TextAdventure.Rooms
 
             PathfinderModule pathfinderModule = new PathfinderModule();
             base.Items.Add(pathfinderModule);
+        }
+        public override string[] Enter(Player player)
+        {
+            return new string[] {
+                "Du betrittst die Stackoverflow-Kammer",
+                "Die Kammer ist überfüllt mit sehr schlecht gefragten Problemen/Fragen...",
+                "...und noch schlechteren Antworten." 
+            };
         }
     }
 }

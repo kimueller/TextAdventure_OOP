@@ -15,6 +15,7 @@ namespace TextAdventure.NPCs
         {
             return new string[]
             {
+                "[B]yte Spider:",
                 "01110011 01110011 01110011",
                 "0x53 0x53 0x53",
                 "0xDE 0xAD 0xBE 0xEF",

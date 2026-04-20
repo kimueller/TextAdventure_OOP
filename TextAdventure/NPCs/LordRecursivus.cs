@@ -19,7 +19,7 @@ namespace TextAdventure.NPCs
                 _hasSpoken = true;
                 return new string[]
                 {
-                    "MuHAHAHAHAHA! Du hast mich gefunden, Lord Recursivus, der Wächter der Dunkelheit!",
+                    "MUHahAhAHaHA! Du hast mich gefunden, Lord Recursivus, der Wächter der Unendlichkeit!",
                     "Du bist hier gefangen, bis Du das Rätsel der Rekursion gelöst hast!\n",
                     "Rätsel:",
                     "Ich wiederhole mich... immer und immer wieder...",

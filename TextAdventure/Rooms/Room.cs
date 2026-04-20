@@ -35,11 +35,5 @@ namespace TextAdventure.Rooms
         {
             return new string[] { $"Du gehst nach {player.LastDirection} und betrittst {Name}." };
         }
-
-        // Wird aufgerufen wenn Spieler den Raum verlaesst
-        public virtual string[] Leave(Player player)
-        {
-            return new string[] { };
-        }
     }
 }

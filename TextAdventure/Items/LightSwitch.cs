@@ -16,15 +16,6 @@ namespace TextAdventure.Items
         public override string[] Use(Room room)
         {
             room.IsLightOn = !room.IsLightOn;
-            if (!room.IsLightOn && hellowWorldNPC != null)
-            {
-                // Nachtportier schaltet Licht wieder an
-                hellowWorldNPC.ReactToLightSwitch();
-                return new string[]
-                {
-                    "Das Licht geht aus. Nachtportier schaltet es wieder ein und schaut Dich böse an."
-                };
-            }
             if (room.IsLightOn)
                 return new string[] { "Du schaltest das Licht ein. Es wird hell." };
             else

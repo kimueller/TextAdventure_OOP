@@ -237,7 +237,7 @@ namespace TextAdventure.Controls
             _player.CurrentRoom = next;
             string[] enterLines = next.Enter(_player);
             foreach (string line in enterLines)
-                HelperFunctions.WriteLineColour(line, ConsoleColor.Green);
+                HelperFunctions.WriteLineColour(line, ConsoleColor.DarkGray);
         }
 
         private void Use(string target)

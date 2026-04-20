@@ -9,6 +9,13 @@ namespace TextAdventure
     {
         static void Main(string[] args)
         {
+
+
+            // Map & Player initialisieren
+            var startRoom = MapBuilder.Build();
+            Player player = new Player("Sir Bytus, der III.");
+            player.CurrentRoom = startRoom;
+
             HelperFunctions.WriteLineColour(
                 "In einem Universum aus Daten und Algorithmen schlummert eine uralte Macht:\n" +
                 "der allmächtige Compiler 'AC 9000'. Legenden berichten von seinem\n" +
@@ -20,7 +27,7 @@ namespace TextAdventure
                 "Programmierer:innen lesen – Fehler erkennen, bevor sie überhaupt\n" +
                 "geschrieben wurden.\n\n" +
 
-                "Du, Dave – ein:e mutige:r Programmierer:in – begibst dich auf die Suche\n" +
+                $"Du, {player.Name} – ein mutiger FHV-Student – begibst dich auf die Suche\n" +
                 "nach diesem sagenumwobenen Artefakt. Angetrieben von Neugier,\n" +
                 "Ehrgeiz und dem Wunsch, den perfekten Code zu schreiben.\n\n" +
 
@@ -35,15 +42,10 @@ namespace TextAdventure
                 "Initialisierung gestartet...",
                 ConsoleColor.Cyan);
 
-            // Map & Player initialisieren
-            var startRoom = MapBuilder.Build();
-            Player player = new Player("Peter");
-            player.CurrentRoom = startRoom;
-
             // Dunkel-Intro + NPC-Schrei
             Console.WriteLine($"\nDu stehst in {startRoom.Name}. Es ist stockdunkel. " +
-                              "Aus dem Raum heraus hörst Du eine Person schreien:");
-            HelperFunctions.WriteLineColour("[N]achtportier: \"Halt, stehen bleiben! Wer ist da?\"",
+                              "Aus dem Raum heraus hörst Du etwas schreien:");
+            HelperFunctions.WriteLineColour("[H]ello Van World: \"Halt, stehen bleiben! Wer ist da?\"",
                 ConsoleColor.Yellow);
 
             // Spielschleife

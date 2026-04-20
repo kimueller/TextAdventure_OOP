@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using TextAdventure.Items;
 using TextAdventure.NPCs;
+using TextAdventure.Players;
 
 namespace TextAdventure.Rooms
 {
@@ -17,6 +18,13 @@ namespace TextAdventure.Rooms
 
             LightSwitch lightSwitch = new LightSwitch();
             base.Items.Add(lightSwitch);
+        }
+        public override string[] Enter(Player player)
+        {
+            return new string[] {
+                "Du betrittst die Interface-Passage.",
+                "Du hörst im Dunkeln ein leises Zischen...."
+            };
         }
     }
 }
