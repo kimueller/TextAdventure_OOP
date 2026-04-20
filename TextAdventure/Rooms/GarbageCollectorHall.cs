@@ -4,7 +4,7 @@ namespace TextAdventure.Rooms
 {
     public class GarbageCollectorHall : Room
     {
-        public GarbageCollectorHall() : base("Halle der Garbage Collectors", "Osten --> Rekursionsraum\nWesten --> Initalisierungsraum\nSüden --> Debugginglabor")
+        public GarbageCollectorHall() : base("Halle der Garbage Collectors", "\nOsten --> Rekursionsraum\nWesten --> Initalisierungsraum\nSüden --> Debugginglabor")
         {
         }
 

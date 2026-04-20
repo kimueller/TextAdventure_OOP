@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using TextAdventure.Items;
-using TextAdventure.NPCs;
+﻿using TextAdventure.Items;
 using TextAdventure.Players;
 
 namespace TextAdventure.Rooms
 {
     public class ByteCatacombs : Room
     {
-        public ByteCatacombs() : base("Byte-Katakomben", "Norden --> Interface-Passage", false)
+        public ByteCatacombs() : base("Byte-Katakomben", "\nNorden --> Interface-Passage", false)
         {
             //Item 
             ExceptionScroll exceptionScroll = new ExceptionScroll();
@@ -22,7 +18,7 @@ namespace TextAdventure.Rooms
 
         public override string[] Enter(Player player)
         {
-            return new string[] { 
+            return new string[] {
                 "Du betrittst die Byte-Katakomben.",
                 "Es ist stockdunkel, du kannst nichts sehen. Es riecht nach altem Code und vergessenen Bugs.",
             };

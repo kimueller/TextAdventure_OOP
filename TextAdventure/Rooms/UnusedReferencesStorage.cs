@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using TextAdventure.NPCs;
-using TextAdventure.Players;
+﻿using TextAdventure.Players;
 
 namespace TextAdventure.Rooms
 {
     public class UnusedReferencesStorage : Room
     {
-        public UnusedReferencesStorage() : base("Unused Referenceslager", "Osten --> Legacy Codearchive\nWesten --> Interface-Passage")
+        public UnusedReferencesStorage() : base("Unused Referenceslager", "\nOsten --> Legacy Codearchive\nWesten --> Interface-Passage")
         {
         }
 

@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using TextAdventure.NPCs;
+﻿using TextAdventure.NPCs;
 using TextAdventure.Players;
 
 namespace TextAdventure.Rooms
@@ -10,7 +7,7 @@ namespace TextAdventure.Rooms
     {
         public bool Solved { get; set; }
 
-        public RecursionRoom() : base("Rekursionsraum", "Westen --> Halle der Garbage Collectors")
+        public RecursionRoom() : base("Rekursionsraum", "\nWesten --> Halle der Garbage Collectors")
         {
             LordRecursivus lordRecursivus = new LordRecursivus();
             base.NPCs.Add(lordRecursivus);

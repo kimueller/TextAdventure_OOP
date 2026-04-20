@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 using TextAdventure.Items;
-using TextAdventure.NPCs;
 using TextAdventure.Players;
 
 namespace TextAdventure.Rooms
@@ -10,7 +7,7 @@ namespace TextAdventure.Rooms
     public class StackoverflowChamber : Room
     {
         public List<Room> CanidateRooms { get; set; }
-        public StackoverflowChamber(List<Room> candidateRooms) : base("Stackoverflow-Kammer", "Osten --> Interface-Passage")
+        public StackoverflowChamber(List<Room> candidateRooms) : base("Stackoverflow-Kammer", "\nOsten --> Interface-Passage")
         {
             CanidateRooms = candidateRooms;
 
@@ -22,7 +19,7 @@ namespace TextAdventure.Rooms
             return new string[] {
                 "Du betrittst die Stackoverflow-Kammer",
                 "Die Kammer ist überfüllt mit sehr schlecht gefragten Problemen/Fragen...",
-                "...und noch schlechteren Antworten." 
+                "...und noch schlechteren Antworten."
             };
         }
     }

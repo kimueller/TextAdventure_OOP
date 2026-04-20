@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using TextAdventure.Rooms;
 
 namespace TextAdventure.Items
@@ -16,7 +15,8 @@ namespace TextAdventure.Items
         {
             return new string[]
             {
-                "NullReferenceException",
+                "In der Exception-Schriftrolle kann man gesammelte Fehlermeldungen entnehmen:",
+                "\nNullReferenceException",
                 "StackOverflowException",
                 "IndexOutOfRangeException",
                 "InvalidOperationException",

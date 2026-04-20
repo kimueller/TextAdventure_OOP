@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using TextAdventure.Items;
+﻿using TextAdventure.Items;
 using TextAdventure.NPCs;
 using TextAdventure.Players;
 
@@ -9,7 +6,7 @@ namespace TextAdventure.Rooms
 {
     public class InterfacePassage : Room
     {
-        public InterfacePassage() : base("Interface-Passage", "Norden --> Debugginglabor\nOsten --> Unused Refernces-Lager\nSüden --> Byte-Katakomben\nWesten --> Stackoverflowkammer", false)
+        public InterfacePassage() : base("Interface-Passage", "\nNorden --> Debugginglabor\nOsten --> Unused Refernces-Lager\nSüden --> Byte-Katakomben\nWesten --> Stackoverflowkammer", false)
 
         {
             //NPCs hinzufügen
