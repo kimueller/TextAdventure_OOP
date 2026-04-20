@@ -4,6 +4,7 @@ using TextAdventure.Interfaces;
 using TextAdventure.Items;
 using TextAdventure.NPCs;
 using TextAdventure.Rooms;
+using TextAdventure.Players;
 
 namespace TextAdventure.Controls
 {

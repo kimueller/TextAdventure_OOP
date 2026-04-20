@@ -1,6 +1,8 @@
 using System.Collections.Generic;
 using TextAdventure.Items;
 using TextAdventure.NPCs;
+using TextAdventure.Players;
+
 
 namespace TextAdventure.Rooms
 {

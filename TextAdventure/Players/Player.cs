@@ -1,6 +1,6 @@
 using TextAdventure.Rooms;
 
-namespace TextAdventure.Player
+namespace TextAdventure.Players
 {
     // Repräsentiert den Spieler Dave
     public class Player
