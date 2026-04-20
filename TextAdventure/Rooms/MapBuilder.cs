@@ -12,7 +12,7 @@ namespace TextAdventure.Rooms
         public static (Room startRoom, List<Room> allRooms) Build()
         {
             // --- Raeume erstellen ---
-            EntryHall entryHall = new EntryHall();
+            StartRoom entryHall = new StartRoom();
             Room staircase = new GenericRoom("Stiegenhaus");
             Room hallway1 = new GenericRoom("Kellergang I");
             Room hallway2 = new GenericRoom("Kellergang II");
