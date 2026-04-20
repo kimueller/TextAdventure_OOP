@@ -227,7 +227,7 @@ namespace TextAdventure.Controls
         private void Go(string direction)
         {
             Room r = _player.CurrentRoom;
-            if (r is RecursionRoom room)
+            if (r is RecursionRoom room && room.Solved == false)
             {
                 HelperFunctions.WriteLineColour(
                     $"Du kannst den {r.Name} nicht verlassen!\n" +

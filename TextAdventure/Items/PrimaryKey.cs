@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using TextAdventure.Rooms;
+﻿using TextAdventure.Rooms;
 
 namespace TextAdventure.Items
 {
@@ -14,7 +11,7 @@ namespace TextAdventure.Items
 
         public override string[] Use(Room room)
         {
-            return new string[] { $"Der Schlüssel zum Verwenden des Compilers!" };
+            return new string[] { $"Der Schlüssel zum Bändigens des Compilers!" };
         }
     }
 }
