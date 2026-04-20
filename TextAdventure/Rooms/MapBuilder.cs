@@ -19,7 +19,7 @@ namespace TextAdventure.Rooms
             Room broom = new GenericRoom("Besenkammer");
             Room oldServer = new GenericRoom("Alter Serverraum");
             Room abandonedOffice = new GenericRoom("Verlassenes Büro");
-            Room coldRoom = new GenericRoom("Kühlraum", isLit: false);
+            Room coldRoom = new GenericRoom("Kühlraum", IsLightOn: false);
             Room warehouse = new GenericRoom("Lagerhalle");
 
             // --- Verbindungen gemaess Beispielmap ---

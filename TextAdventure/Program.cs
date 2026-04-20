@@ -10,7 +10,7 @@ namespace TextAdventure
         static void Main(string[] args)
         {
             // Intro-Text
-            GameController.WriteLineColour(
+            HelperFunctions.WriteLineColour(
                 "In einem Universum aus Daten und Algorithmen schlummert eine uralte Macht: der\n" +
                 "allmächtige Compiler 'AC 9000'. Legenden erzählen von seinem unendlichen Wissen\n" +
                 "und seiner Fähigkeit, jeden Code manipulieren zu können, jeden Datentyp casten\n" +
@@ -25,13 +25,13 @@ namespace TextAdventure
 
             // Map & Player initialisieren
             var (startRoom, allRooms) = MapBuilder.Build();
-            Player player = new Player("Dave");
+            Player player = new Player("Peter");
             player.CurrentRoom = startRoom;
 
             // Dunkel-Intro + NPC-Schrei
             Console.WriteLine($"\nDu stehst in {startRoom.Name}. Es ist stockdunkel. " +
                               "Aus dem Raum heraus hörst Du eine Person schreien:");
-            GameController.WriteLineColour("[N]achtportier: \"Halt, stehen bleiben! Wer ist da?\"",
+            HelperFunctions.WriteLineColour("[N]achtportier: \"Halt, stehen bleiben! Wer ist da?\"",
                 ConsoleColor.Yellow);
 
             // Spielschleife

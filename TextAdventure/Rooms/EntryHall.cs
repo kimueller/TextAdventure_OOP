@@ -7,7 +7,7 @@ namespace TextAdventure.Rooms
     // Eingangshalle: Startpunkt, dunkel, Nachtportier wartet hier
     public class EntryHall : Room
     {
-        public EntryHall() : base("Eingangshalle", isLit: false) { }
+        public EntryHall() : base("Eingangshalle", isLightOn: false) { }
 
         public override string[] Enter(Player player)
         {

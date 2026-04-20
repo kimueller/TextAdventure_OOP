@@ -11,7 +11,7 @@ namespace TextAdventure.Rooms
     public abstract class Room
     {
         public string Name { get; protected set; }
-        public bool IsLit { get; set; }
+        public bool IsLightOn { get; set; }
 
         public Room North { get; set; }
         public Room South { get; set; }
@@ -21,10 +21,10 @@ namespace TextAdventure.Rooms
         public List<Item> Items { get; protected set; }
         public List<NPC>  NPCs  { get; protected set; }
 
-        protected Room(string name, bool isLit = true)
+        protected Room(string name, bool isLightOn = true)
         {
             Name  = name;
-            IsLit = isLit;
+            IsLightOn = isLightOn;
             Items = new List<Item>();
             NPCs  = new List<NPC>();
         }

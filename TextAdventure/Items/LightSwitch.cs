@@ -15,8 +15,8 @@ namespace TextAdventure.Items
 
         public override string[] Use(Room room)
         {
-            room.IsLit = !room.IsLit;
-            if (!room.IsLit && _porter != null)
+            room.IsLightOn = !room.IsLightOn;
+            if (!room.IsLightOn && _porter != null)
             {
                 // Nachtportier schaltet Licht wieder an
                 _porter.ReactToLightSwitch();
@@ -25,7 +25,7 @@ namespace TextAdventure.Items
                     "Das Licht geht aus. Nachtportier schaltet es wieder ein und schaut Dich böse an."
                 };
             }
-            if (room.IsLit)
+            if (room.IsLightOn)
                 return new string[] { "Du schaltest das Licht ein. Es wird hell." };
             else
                 return new string[] { "Du schaltest das Licht aus. Es wird dunkel." };

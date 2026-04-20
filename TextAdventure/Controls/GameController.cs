@@ -6,6 +6,7 @@ using TextAdventure.NPCs;
 using TextAdventure.Rooms;
 using TextAdventure.Players;
 
+
 namespace TextAdventure.Controls
 {
     // Loesung: GameController steuert den Spielablauf und parst Benutzereingaben
@@ -27,10 +28,10 @@ namespace TextAdventure.Controls
         public void PrintPrompt()
         {
             Console.Write($"\nRaum {_player.CurrentRoom.Name}: ");
-            WriteColour("[U]mschauen ", ConsoleColor.Cyan);
-            WriteColour("[S]prich ", ConsoleColor.Yellow);
-            WriteColour("[G]ehe ", ConsoleColor.Green);
-            WriteColour("[N]utze", ConsoleColor.Magenta);
+            HelperFunctions.WriteColour("[U]mschauen ", ConsoleColor.Cyan);
+            HelperFunctions.WriteColour("[S]prich ", ConsoleColor.Yellow);
+            HelperFunctions.WriteColour("[G]ehe ", ConsoleColor.Green);
+            HelperFunctions.WriteColour("[N]utze", ConsoleColor.Magenta);
             Console.WriteLine();
             Console.Write("> ");
         }
@@ -45,41 +46,41 @@ namespace TextAdventure.Controls
 
             if (cmd == "U" || cmd == "UMSCHAUEN")
             {
-                DoLookAround();
+                LookAround();
             }
             else if (cmd == "S" || cmd == "SPRICH")
             {
                 string target = parts.Length > 1 ? parts[1] : "";
-                DoTalk(target);
+                Talk(target);
             }
             else if (cmd == "G" || cmd == "GEHE")
             {
                 string dir = parts.Length > 1 ? parts[1].ToUpper() : "";
-                DoGo(dir);
+                Go(dir);
             }
             else if (cmd == "N" || cmd == "NUTZE")
             {
                 string target = parts.Length > 1 ? parts[1] : "";
-                DoUse(target);
+                Use(target);
             }
             else
             {
-                WriteLineColour("Unbekannter Befehl. Verfügbare Befehle: [U]mschauen [S]prich [G]ehe [N]utze", ConsoleColor.DarkGray);
+                HelperFunctions.WriteLineColour("Unbekannter Befehl. Verfügbare Befehle: [U]mschauen [S]prich [G]ehe [N]utze", ConsoleColor.DarkGray);
             }
         }
 
         // --- Aktionen ---
 
-        private void DoLookAround()
+        private void LookAround()
         {
             Room r = _player.CurrentRoom;
-            if (!r.IsLit)
+            if (!r.IsLightOn)
             {
-                WriteLineColour($"Es ist dunkel in {r.Name} und Du siehst nichts.", ConsoleColor.DarkGray);
+                HelperFunctions.WriteLineColour($"Es ist dunkel in {r.Name} und Du siehst nichts.", ConsoleColor.DarkGray);
                 return;
             }
 
-            WriteLineColour($"Du schaust Dich in {r.Name} um.", ConsoleColor.White);
+            HelperFunctions.WriteLineColour($"Du schaust Dich in {r.Name} um.", ConsoleColor.White);
 
             // Himmelsrichtungen
             Console.WriteLine("Himmelsrichtungen: [N]orden, [S]üden, [W]esten, [O]sten");
@@ -87,19 +88,19 @@ namespace TextAdventure.Controls
             // NPCs
             Console.WriteLine("Es sind folgende Personen anwesend:");
             if (r.NPCs.Count == 0)
-                WriteLineColour(" Keine Personen im Raum.", ConsoleColor.DarkGray);
+                HelperFunctions.WriteLineColour(" Keine Personen im Raum.", ConsoleColor.DarkGray);
             else
                 foreach (NPC npc in r.NPCs)
-                    WriteLineColour($" [{npc.Name[0]}] {npc.Name}", ConsoleColor.Yellow);
+                    HelperFunctions.WriteLineColour($" [{npc.Name[0]}] {npc.Name}", ConsoleColor.Yellow);
 
             // Items
             Console.WriteLine("Du siehst im Raum:");
             if (r.Items.Count == 0)
-                WriteLineColour(" Keine Gegenstände im Raum.", ConsoleColor.DarkGray);
+                HelperFunctions.WriteLineColour(" Keine Gegenstände im Raum.", ConsoleColor.DarkGray);
             else
                 for (int i = 0; i < r.Items.Count; i++)
                 {
-                    WriteColour($" [{i + 1}] {r.Items[i].Name}", ConsoleColor.Magenta);
+                    HelperFunctions.WriteColour($" [{i + 1}] {r.Items[i].Name}", ConsoleColor.Magenta);
                     if (r.Items[i].ContainedItems.Count > 0)
                     {
                         Console.Write(" (enthält: ");
@@ -114,11 +115,11 @@ namespace TextAdventure.Controls
                 }
         }
 
-        private void DoTalk(string target)
+        private void Talk(string target)
         {
             if (string.IsNullOrEmpty(target))
             {
-                WriteLineColour("Mit wem oder was möchtest Du sprechen?", ConsoleColor.DarkGray);
+                HelperFunctions.WriteLineColour("Mit wem oder was möchtest Du sprechen?", ConsoleColor.DarkGray);
                 return;
             }
 
@@ -127,23 +128,23 @@ namespace TextAdventure.Controls
             // Erst NPCs durchsuchen
             foreach (NPC npc in r.NPCs)
             {
-                if (MatchesTarget(npc.Name, target))
+                if (HelperFunctions.MatchesTarget(npc.Name, target))
                 {
-                    PrintLines(npc.Talk(), ConsoleColor.Yellow);
+                    HelperFunctions.PrintLines(npc.Talk(), ConsoleColor.Yellow);
                     return;
                 }
             }
 
             // Dann sprechbare Items
-            if (!r.IsLit)
+            if (!r.IsLightOn)
             {
-                WriteLineColour("Es ist zu dunkel um irgendjemanden oder etwas zu sehen.", ConsoleColor.DarkGray);
+                HelperFunctions.WriteLineColour("Es ist zu dunkel um irgendjemanden oder etwas zu sehen.", ConsoleColor.DarkGray);
                 return;
             }
             for (int i = 0; i < r.Items.Count; i++)
             {
                 bool matchIndex = target == (i + 1).ToString();
-                bool matchName  = MatchesTarget(r.Items[i].Name, target);
+                bool matchName  = HelperFunctions.MatchesTarget(r.Items[i].Name, target);
                 if (matchIndex || matchName)
                 {
                     if (r.Items[i] is ITalkable talkable)
@@ -156,23 +157,23 @@ namespace TextAdventure.Controls
 
                         foreach (string line in lines)
                             if (line != "GAME_WIN")
-                                WriteLineColour(line, ConsoleColor.Cyan);
+                                HelperFunctions.WriteLineColour(line, ConsoleColor.Cyan);
 
-                        if (win) TriggerWin();
+                        if (win) _gameRunning= HelperFunctions.StopGame();
                         return;
                     }
                     else
                     {
-                        WriteLineColour($"Mit {r.Items[i].Name} kann man nicht sprechen.", ConsoleColor.DarkGray);
+                        HelperFunctions.WriteLineColour($"Mit {r.Items[i].Name} kann man nicht sprechen.", ConsoleColor.DarkGray);
                         return;
                     }
                 }
             }
 
-            WriteLineColour($"'{target}' ist hier nicht zu finden.", ConsoleColor.DarkGray);
+            HelperFunctions.WriteLineColour($"'{target}' ist hier nicht zu finden.", ConsoleColor.DarkGray);
         }
 
-        private void DoGo(string direction)
+        private void Go(string direction)
         {
             Room r = _player.CurrentRoom;
             Room next = null;
@@ -189,13 +190,13 @@ namespace TextAdventure.Controls
                 case "O": case "OSTEN": case "OST":
                     next = r.East; dirName = "Osten"; break;
                 default:
-                    WriteLineColour("Unbekannte Richtung. Benutze N, S, W oder O.", ConsoleColor.DarkGray);
+                    HelperFunctions.WriteLineColour("Unbekannte Richtung. Benutze N, S, W oder O.", ConsoleColor.DarkGray);
                     return;
             }
 
             if (next == null)
             {
-                WriteLineColour($"Du versuchst nach {dirName} zu gehen - Du läufst mit voller Wucht gegen eine verschlossene Türe. Autsch!", ConsoleColor.Red);
+                HelperFunctions.WriteLineColour($"Du versuchst nach {dirName} zu gehen - Du läufst mit voller Wucht gegen eine verschlossene Türe. Autsch!", ConsoleColor.Red);
                 return;
             }
 
@@ -203,83 +204,47 @@ namespace TextAdventure.Controls
             _player.CurrentRoom = next;
             string[] enterLines = next.Enter(_player);
             foreach (string line in enterLines)
-                WriteLineColour(line, ConsoleColor.Green);
+                HelperFunctions.WriteLineColour(line, ConsoleColor.Green);
         }
 
-        private void DoUse(string target)
+        private void Use(string target)
         {
             if (string.IsNullOrEmpty(target))
             {
-                WriteLineColour("Was möchtest Du benutzen?", ConsoleColor.DarkGray);
+                HelperFunctions.WriteLineColour("Was möchtest Du benutzen?", ConsoleColor.DarkGray);
                 return;
             }
 
             Room r = _player.CurrentRoom;
 
-            if (!r.IsLit)
+            if (!r.IsLightOn)
             {
                 // Lichtschalter koennen auch im Dunkeln gefunden werden (durch Ertasten)
                 foreach (Item item in r.Items)
                     if (item is LightSwitch)
                     {
-                        if (MatchesTarget(item.Name, target) || target == (r.Items.IndexOf(item)+1).ToString())
+                        if (HelperFunctions.MatchesTarget(item.Name, target) || target == (r.Items.IndexOf(item) + 1).ToString())
                         {
-                            PrintLines(item.Use(r), ConsoleColor.Magenta);
+                            HelperFunctions.PrintLines(item.Use(r), ConsoleColor.Magenta);
                             return;
                         }
                     }
-                WriteLineColour("Es ist zu dunkel um etwas zu benutzen.", ConsoleColor.DarkGray);
+                HelperFunctions.WriteLineColour("Es ist zu dunkel um etwas zu benutzen.", ConsoleColor.DarkGray);
                 return;
             }
 
             for (int i = 0; i < r.Items.Count; i++)
             {
                 bool matchIndex = target == (i + 1).ToString();
-                bool matchName  = MatchesTarget(r.Items[i].Name, target);
+                bool matchName = HelperFunctions.MatchesTarget(r.Items[i].Name, target);
                 if (matchIndex || matchName)
                 {
-                    PrintLines(r.Items[i].Use(r), ConsoleColor.Magenta);
+                    HelperFunctions.PrintLines(r.Items[i].Use(r), ConsoleColor.Magenta);
                     return;
                 }
             }
 
-            WriteLineColour($"'{target}' ist hier nicht zu finden.", ConsoleColor.DarkGray);
-        }
-
-        // --- Hilfsmethoden ---
-
-        private bool MatchesTarget(string name, string target)
-        {
-            // Erlaubt Abkuerzungen: erster Buchstabe oder vollstaendiger Name
-            return name.StartsWith(target, StringComparison.OrdinalIgnoreCase)
-                || name.Equals(target, StringComparison.OrdinalIgnoreCase);
-        }
-
-        private void TriggerWin()
-        {
-            Console.WriteLine();
-            WriteLineColour("Game Over - vielen Dank für das Spielen von 'Quest for the Almighty Compiler'.", ConsoleColor.Cyan);
-            _gameRunning = false;
-        }
-
-        private void PrintLines(string[] lines, ConsoleColor colour)
-        {
-            foreach (string line in lines)
-                WriteLineColour(line, colour);
-        }
-
-        // --- Konsolen-Hilfsmethoden (analog zur Aufgabenstellung) ---
-        public static void WriteColour(string text, ConsoleColor colour = ConsoleColor.White)
-        {
-            ConsoleColor old = Console.ForegroundColor;
-            Console.ForegroundColor = colour;
-            Console.Write(text);
-            Console.ForegroundColor = old;
-        }
-
-        public static void WriteLineColour(string text, ConsoleColor colour = ConsoleColor.White)
-        {
-            WriteColour(text + Environment.NewLine, colour);
+            HelperFunctions.WriteLineColour($"'{target}' ist hier nicht zu finden.", ConsoleColor.DarkGray);
         }
     }
 }

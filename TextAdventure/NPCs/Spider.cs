@@ -3,12 +3,12 @@ using TextAdventure.Rooms;
 namespace TextAdventure.NPCs
 {
     // Nachtportier: schaltet das Licht ein wenn man mit ihm spricht
-    public class NightPorter : NPC
+    public class Spider : NPC
     {
         private Room _room;
         private bool _hasSpoken;
 
-        public NightPorter(Room room) : base("Nachtportier")
+        public Spider(Room room) : base("Spider")
         {
             _room = room;
             _hasSpoken = false;

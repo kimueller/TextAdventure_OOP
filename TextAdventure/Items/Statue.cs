@@ -21,7 +21,7 @@ namespace TextAdventure.Items
             {
                 _used = true;
                 foreach (Room r in _allRooms)
-                    r.IsLit = true;
+                    r.IsLightOn = true;
                 return new string[]
                 {
                     "Die Statue macht klack und Du siehst nun ein Schild auf dem steht: \"Alle Räume sind nun erhellt!\""
