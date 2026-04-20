@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using TextAdventure.NPCs;
-using TextAdventure.Players;
+﻿using TextAdventure.Players;
 
 namespace TextAdventure.Rooms
 {
     public class GarbageCollectorHall : Room
     {
-        public GarbageCollectorHall() : base("Halle der Garbage Collectors", "Osten --> Rekursionsraum\nWesten --> Initalisierungsraum")
+        public GarbageCollectorHall() : base("Halle der Garbage Collectors", "Osten --> Rekursionsraum\nWesten --> Initalisierungsraum\nSüden --> Debugginglabor")
         {
         }
 
